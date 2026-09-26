@@ -2,6 +2,8 @@
 
 A responsive furniture concept store with an editorial layout, product category filters, accessible product dialogs, a shopping bag with quantity controls, and a simulated checkout. Prices and product names are fictional. No payment is collected or order sent. Cart state is in memory and resets on refresh.
 
+The interface is fully animated: an intro loader, a sticky glass header that hides on scroll, an auto-advancing hero slideshow with a clip-path reveal and parallax, word-by-word headline reveals, a values marquee, 3D-tilt product cards with a spotlight hover, a sliding filter pill, count-up stats, scroll-lit text, magnetic buttons, a custom cursor on desktop, animated dialogs and cart drawer, and a fly-to-bag effect. All motion is disabled when the visitor prefers reduced motion.
+
 ## Run locally
 
 Requires Python 3. No installation or build step is needed.
@@ -15,8 +17,8 @@ Open http://localhost:4173. The `dist` folder is the complete deployable site. G
 ## Files
 
 - `dist/index.html`: semantic page and native dialogs
-- `dist/styles.css`: responsive design, motion preferences, typography
-- `dist/app.js`: catalog, filters, cart and demo checkout
+- `dist/styles.css`: responsive design, animations, motion preferences, typography
+- `dist/app.js`: catalog, filters, cart, demo checkout and scroll/pointer animations
 - `dist/assets/`: locally hosted photography
 
 The optional `list_products` WebMCP tool is feature-detected; unsupported browsers retain all shopping interactions. Fonts load from Google Fonts with system fallbacks.
