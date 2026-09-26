@@ -237,32 +237,18 @@ function splitWords(root, className, inner) {
 }
 
 function observeReveals() {
-  const targets = document.querySelectorAll('.reveal, .split, .footer-word, [data-count]');
+  const targets = document.querySelectorAll('.reveal, .split, .footer-word');
   if (reducedMotion || !('IntersectionObserver' in window)) {
-    targets.forEach(el => { el.classList.add('in'); if (el.dataset.count) countUp(el, true); });
+    targets.forEach(el => el.classList.add('in'));
     return;
   }
+  document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
   const io = new IntersectionObserver(entries => entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add('in');
-    if (entry.target.dataset.count) countUp(entry.target);
     io.unobserve(entry.target);
   }), {threshold: .2, rootMargin: '0px 0px -5% 0px'});
   targets.forEach(el => io.observe(el));
-}
-
-function countUp(el, instant) {
-  const target = Number(el.dataset.count);
-  const format = n => (el.dataset.prefix || '') + Math.round(n).toLocaleString('en-IN') + (el.dataset.suffix || '');
-  if (instant) return el.textContent = format(target);
-  const start = performance.now();
-  const duration = 1600;
-  const tick = now => {
-    const t = Math.min((now - start) / duration, 1);
-    el.textContent = format(target * (1 - Math.pow(2, -10 * t)));
-    if (t < 1) requestAnimationFrame(tick); else el.textContent = format(target);
-  };
-  requestAnimationFrame(tick);
 }
 
 function bindTilt() {
@@ -349,7 +335,7 @@ function initScroll() {
       if (y < innerHeight * 1.5) heroSlides.style.transform = `translateY(${y * .12}px)`;
       if (words.length) {
         const r = fill.getBoundingClientRect();
-        const t = Math.min(Math.max((innerHeight * .85 - r.top) / (innerHeight * .55), 0), 1);
+        const t = Math.min(Math.max((innerHeight * .95 - r.top) / (innerHeight * .45), 0), 1);
         const lit = Math.round(t * words.length);
         words.forEach((w, i) => w.classList.toggle('on', i < lit));
       }
